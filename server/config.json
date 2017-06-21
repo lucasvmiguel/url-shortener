@@ -1,0 +1,5 @@
+{
+  "port": 3000,
+  "urlApi": "http://gymia-shorty.herokuapp.com",
+  "mongoConnString": "mongodb://localhost/test"
+}
