@@ -98,6 +98,9 @@
   border-radius: 0.2rem;
   border: 0px;
   height: 2rem;
+  padding-left: 1rem;
+  color: #5C5B5B;
+  font-size: 0.9rem;
 }
 
 .form-input-submit {
@@ -111,12 +114,12 @@
 
 .clear-section-title {
   color: #5C5B5B;
-  text-decoration: blink;
+  text-decoration: none;
   font-size: 1.2rem;
 }
 
 .clear-section-link {
-  text-decoration: blink;
+  text-decoration: none;
   color: #F4272F;
   padding-top: 0.1rem;
 }
@@ -137,6 +140,35 @@
 
 .align-center {
   text-align: center;
+}
+
+.click-to-copy-link {
+  text-decoration: none;
+  color: #F4272F;
+  padding-left: 1rem;
+  display: none;
+}
+
+.furfles:hover .click-to-copy-link {
+  display: inline-block;
+}
+
+.url-shorten-link {
+  text-decoration: none;
+  color: #F4272F;
+}
+
+.url-shorten-link:hover + .click-to-copy-link {
+  display: initial;
+}
+    
+.url-extended-link {
+  color: #c5c5c5;
+}
+
+.url-domain-link {
+  color: #5C5B5B;
+  text-decoration: none;
 }
 
 /*#5C5B5B*/
