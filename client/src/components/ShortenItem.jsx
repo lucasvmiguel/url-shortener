@@ -6,7 +6,7 @@ import {timeSinceString} from '../services/datetime.service.js';
 const ShortenItem = ({appUrl, urlShorten}) => {
   return (
     <div className='flex-grid'>
-      <div className='col-0-8 block-grid'>
+      <div className='col-0-8'>
         <p className="furfles">
           <strong>
             <a className='url-domain-link' href={`${appUrl}/${urlShorten.urlShorten}`} target="_blank">{appUrl}/</a>
