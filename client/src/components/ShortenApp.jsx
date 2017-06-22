@@ -6,12 +6,16 @@ import ShortenForm from './ShortenForm';
 import ShortenClearSection from './ShortenClearSection';
 import ShortenList from './ShortenList';
 
-const ShortenApp = ({formUrl, searchUrl, list, onClickForm, onChangeForm, onClickClear, onClickSearch, onChangeSearch}) => (
-  <div>
-    <ShortenHeader title='Shooooort' description='The link shortener with a long name' />
-    <ShortenForm url={formUrl} onClick={onClickForm} onChange={onChangeForm}/>
-    <ShortenClearSection title='Previously shortened by you' onClick={onClickClear} />
-    <ShortenList list={list} />
+const ShortenApp = ({appUrl, formUrl, searchUrl, list, onClickForm, onChangeForm, onClickClear, onClickSearch, onChangeSearch}) => (
+  <div className='flex-grid'>
+    <div className='col-0-3'></div>
+    <div className='col-0-6'>
+      <ShortenHeader title='Shooooort' description='The link shortener with a long name'  />
+      <ShortenForm url={formUrl} onClick={onClickForm} onChange={onChangeForm} />
+      <ShortenClearSection title='Previously shortened by you' onClick={onClickClear} />
+      <ShortenList appUrl={appUrl} list={list} />
+    </div>
+    <div className='col-0-3'></div>
   </div>
 )
 

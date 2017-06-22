@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ShortenClearSection = ({title, onClick}) => (
-  <div>
-    <h2>{title}</h2>
-    <button onClick={onClick}>Clear history</button>
+  <div className='flex-grid padding-top-section'>
+    <h3 className='col-0-5 clear-section-title'>{title}</h3>
+    <a onClick={onClick} href="#" className='col-0-5 clear-section-link'>Clear history</a>
   </div>
 )
 

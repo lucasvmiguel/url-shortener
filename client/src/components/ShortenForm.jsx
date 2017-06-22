@@ -27,9 +27,9 @@ class ShortenForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" name="url" value={this.state.url} onChange={this.handleChange} />
-        <input type="submit" value="Submit" />
+      <form className='flex-grid padding-top padding-top-section' onSubmit={this.handleSubmit}>
+        <input className="form-input-text col-0-9" type="text" name="url" value={this.state.url} onChange={this.handleChange} />
+        <input className="form-input-submit col-0-2" type="submit" value="Shorten this link" />
       </form>
     );
   }

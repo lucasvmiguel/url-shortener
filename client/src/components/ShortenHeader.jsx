@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ShortenHeader = ({title, description}) => (
-  <div>
-    <h1>{title}</h1>
-    <p>{description}</p>
+  <div className='flex-grid padding-top-section'>
+    <h1 className='col-0-6 header-title'>{title}</h1>
+    <p className='col-0-6 header-description'>{description}</p>
   </div>
 )
 
