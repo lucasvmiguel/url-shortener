@@ -6,5 +6,5 @@
     "connString": "mongodb://localhost"
   },
   "urlApi": "http://gymia-shorty.herokuapp.com",
-  "scheduleTime": 5000
+  "scheduleTime": 100000000
 }

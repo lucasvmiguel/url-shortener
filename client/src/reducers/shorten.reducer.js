@@ -1,18 +1,25 @@
+import {GET_ALL_URLS, GET_ALL_URLS_SUCCESS, GET_ALL_URLS_ERROR} from '../types/shorten.type';
+
 const initialState = {
-  list: [
-    {urlExtended: 'http://aaa.com', urlShorten: 'aaa', visits: 123, lastVisited: Date.now()},
-    {urlExtended: 'http://bbb.com', urlShorten: 'bbb', visits: 456, lastVisited: Date.now()},
-    {urlExtended: 'http://ccc.com', urlShorten: 'ccc', visits: 789, lastVisited: Date.now()}
-  ],
+  urls: [],
   formUrl: '',
-  searchUrl: '',
-  config: {}
+  error: null,
+  isLoading: false
 };
 
 const shorten = (state = initialState, action) => {
   switch (action.type) {
-  case 'SET_CONFIG':
-    state.config = action.config;
+  case GET_ALL_URLS:
+    state.error = null;
+    state.isLoading = true;
+    return state;
+  case GET_ALL_URLS_SUCCESS:
+    state.isLoading = false;
+    state.urls = action.urls;
+    return state;
+  case GET_ALL_URLS_ERROR:
+    state.isLoading = false;
+    state.error = action.error;
     return state;
   default:
     return state;

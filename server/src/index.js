@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import cors from 'cors';
 
 import config from './config.json';
 import refreshData from './shorten/refreshData';
@@ -18,13 +19,13 @@ import deleteAllUrlHandler from './shorten/httpHandlers/deleteAllUrlHandler';
 
 // db.once('open', () => console.log(`connected with mongo`));
 
-
 setTimeout(() => {
   setInterval(() => refreshData(config.urlApi), config.scheduleTime);
-}, 2000);
+}, 10000);
 
 const serverHttp = express();
 
+serverHttp.use(cors());
 serverHttp.use(bodyParser.json());
 serverHttp.use(bodyParser.urlencoded({ extended: true }));
 serverHttp.use((err, req, res, next) => {
@@ -37,6 +38,7 @@ serverHttp.get('/resource-status', (req, res) => res.send('status ok!'));
 serverHttp.post('/shorten', createUrlHandler(config.urlApi));
 serverHttp.get('/shorten', getAllUrlHandler(config.urlApi));
 serverHttp.delete('/shorten', deleteAllUrlHandler());
+serverHttp.get('/shorten/:shortcode', () => {});
 serverHttp.all('*', (req, res) => res.send('not found', 404));
 
 serverHttp.listen(config.http.port, () => console.log(`server listening on port ${config.http.port}!`));

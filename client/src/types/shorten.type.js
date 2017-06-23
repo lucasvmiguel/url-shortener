@@ -1,0 +1,3 @@
+export const GET_ALL_URLS = 'GET_ALL_URLS';
+export const GET_ALL_URLS_SUCCESS = 'GET_ALL_URLS_SUCCESS';
+export const GET_ALL_URLS_ERROR = 'GET_ALL_URLS_ERROR';
