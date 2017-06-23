@@ -12,7 +12,7 @@ const ShortenList = ({appUrl, urls}) => {
         <strong className='col-0-1 shorten-list-header align-center'>VISITS</strong>
         <strong className='col-0-2 shorten-list-header align-center'>LAST VISITED</strong>
       </div>
-      {urls.map((url) => <ShortenItem appUrl={appUrl} url={url} />)}
+      {urls.map((url) => <ShortenItem key={url.shortcode} appUrl={appUrl} url={url} />)}
     </div>
   );
 }

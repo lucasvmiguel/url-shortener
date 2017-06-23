@@ -1,6 +1,15 @@
 import request from 'request-promise';
 
-export const fetchStats = ({urlApi, shortcode}) => {
+export const fetchUrl = ({urlApi, shortcode}) => {
+  const options = {
+    uri: `${urlApi}/${shortcode}`,
+    resolveWithFullResponse: true
+  }
+
+  return request(options);
+};
+
+export const fetchUrlStats = ({urlApi, shortcode}) => {
   const options = {
     uri: `${urlApi}/${shortcode}/stats`,
     resolveWithFullResponse: true

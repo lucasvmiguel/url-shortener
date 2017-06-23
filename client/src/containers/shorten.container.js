@@ -1,17 +1,26 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import request from 'request-promise';
 
-import ShortenApp from '../components/ShortenApp.jsx';
-// import {CreateUrl, CreateUrlSuccess, CreateUrlFailure} from '../actions/shorten.action.js';
+import {ChangeUrlForm} from '../actions/shorten.action';
+import {saveUrl, deleteUrls} from '../services/api.service';
+import ShortenApp from '../components/ShortenApp';
 
-// get all urls in first render
-// request(`${config.apiUrl}/shorten`)
-//   .then((body) => {
-//     const urls = JSON.parse(body);
-//     store.dispatch(GetAllUrlsSuccess(urls));
-//   })
-//   .catch((err) => store.dispatch(GetAllUrlsError(err)));
+const createUrl = (dispatch, getState) => {
+  const state = getState();
+  saveUrl({
+    apiUrl: state.config.apiUrl,
+    url: state.shorten.urlForm,
+    dispatch
+  });
+};
+
+const deleteAllUrls = (dispatch, getState) => {
+  const state = getState();
+  deleteUrls({
+    apiUrl: state.config.apiUrl,
+    dispatch
+  });
+};
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -23,7 +32,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // onClickForm: () => dispatch(getAllUrls)
+    onClickClear: () => dispatch(deleteAllUrls),
+    onClickForm: () => dispatch(createUrl),
+    onChangeForm: (url) => dispatch(ChangeUrlForm(url))
   };
 };
 

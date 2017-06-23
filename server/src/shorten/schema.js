@@ -14,3 +14,7 @@ export const isValidStruct = (obj) => {
 export const isValidSearch = (search) => {
   return true;
 }
+
+export const isValidParam = (search) => {
+  return true;
+}

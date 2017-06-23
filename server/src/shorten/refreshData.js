@@ -1,11 +1,11 @@
 import {all, update} from './repository';
-import {fetchStats} from './api';
+import {fetchUrlStats} from './api';
 
 const refreshData = (urlApi) => {
   const urls = all();
   
   urls.map((url) => {
-    fetchStats({urlApi, shortcode: url.shortcode})
+    fetchUrlStats({urlApi, shortcode: url.shortcode})
       .then(handleFetchStatsApiResponse(url))
       .catch(handleFetchStatsApiError);
   })

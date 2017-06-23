@@ -2,25 +2,26 @@ import {isValidStruct} from '../schema';
 import {save} from '../repository';
 import {create} from '../api';
 
-const createUrlHandler = (urlApi) => (req, res) => {
+const createUrlHandler = (urlApi, host) => (req, res) => {
   if (!isValidStruct(req.body)) return res.status(400).send('invalid params');
 
   create(urlApi, {urlExtended: req.body.urlExtended, shortcode: req.body.shortcode})
-    .then(handleCreateUrlApiResponse(res, urlApi, req.body.urlExtended))
+    .then(handleCreateUrlApiResponse(res, host, req.body.urlExtended))
     .catch(handleCreateUrlApiError(res));
 };
 
-const handleCreateUrlApiResponse = (res, urlApi, urlExtended) => (response) => {
+const handleCreateUrlApiResponse = (res, host, urlExtended) => (response) => {
   if (response.statusCode != 201) return res.status(500).send('internal server error');
 
   const url = {
     urlExtended: urlExtended,
-    urlShorten: `${urlApi}/${response.body.shortcode}`,
+    urlShorten: `${host}/shorten/${response.body.shortcode}`,
     shortcode: response.body.shortcode,
     startDate: Date.now(),
     lastSeenDate: Date.now(),
     redirectCount: 0
   };
+
   save(url);
   res.status(201).send('');
   console.info('created: ', url);

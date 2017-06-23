@@ -6,7 +6,7 @@ import ShortenForm from './ShortenForm';
 import ShortenClearSection from './ShortenClearSection';
 import ShortenList from './ShortenList';
 
-const ShortenApp = ({formUrl, urls, appUrl, onClickForm, onChangeForm, onClickClear, onClickSearch, onChangeSearch}) => (
+const ShortenApp = ({formUrl, urls, appUrl, onClickForm, onChangeForm, onClickClear, onChangeSearch}) => (
   <div className='flex-grid'>
     <div className='col-0-3'></div>
     <div className='col-0-6'>

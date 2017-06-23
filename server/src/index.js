@@ -8,6 +8,7 @@ import refreshData from './shorten/refreshData';
 import createUrlHandler from './shorten/httpHandlers/createUrlHandler';
 import getAllUrlHandler from './shorten/httpHandlers/getAllUrlHandler';
 import deleteAllUrlHandler from './shorten/httpHandlers/deleteAllUrlHandler';
+import getUrlHandler from './shorten/httpHandlers/getUrlHandler';
 
 // mongoose.connect(config.mongo.connString);
 // mongoose.Promise = global.Promise;
@@ -35,10 +36,10 @@ serverHttp.use((err, req, res, next) => {
 
 serverHttp.get('/resource-status', (req, res) => res.send('status ok!'));
 
-serverHttp.post('/shorten', createUrlHandler(config.urlApi));
+serverHttp.post('/shorten', createUrlHandler(config.urlApi, config.http.host));
 serverHttp.get('/shorten', getAllUrlHandler(config.urlApi));
 serverHttp.delete('/shorten', deleteAllUrlHandler());
-serverHttp.get('/shorten/:shortcode', () => {});
+serverHttp.get('/shorten/:shortcode', getUrlHandler(config.urlApi));
 serverHttp.all('*', (req, res) => res.send('not found', 404));
 
-serverHttp.listen(config.http.port, () => console.log(`server listening on port ${config.http.port}!`));
+serverHttp.listen(config.http.host.split(':')[2], () => console.log(`server listening on ${config.http.host}!`));

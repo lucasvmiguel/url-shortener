@@ -10,7 +10,7 @@ const ShortenItem = ({appUrl, url}) => {
         <p className="furfles">
           <strong>
             <a className='url-domain-link' href={url.urlShorten} target="_blank">{appUrl}/</a>
-            <a className='url-shorten-link' href={url.url} target="_blank">{url.shortcode}</a>
+            <a className='url-shorten-link' href={url.urlShorten} target="_blank">{url.shortcode}</a>
           </strong> 
           <a className='click-to-copy-link' href="#">Click to copy this link</a>
         </p>
@@ -23,7 +23,7 @@ const ShortenItem = ({appUrl, url}) => {
 }
 
 ShortenItem.propTypes = {
-  urlShorten: PropTypes.object.isRequired,
+  url: PropTypes.object.isRequired,
   appUrl: PropTypes.string.isRequired
 }
 

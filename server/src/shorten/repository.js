@@ -27,8 +27,8 @@ export const all = () => {
 
 export const find = (shortcode) => {
   // return urlSchema.find({urlShorten: urlShorten});
-  for (let i = 0; i < urls; i++) {
-    if (urls[i].shortcode === shortcode) {
+  for (let i = 0; i < urls.length; i++) {
+    if (urls[i].shortcode == shortcode) {
       return urls[i];
     }
   }

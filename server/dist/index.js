@@ -36,6 +36,10 @@ var _deleteAllUrlHandler = require('./shorten/httpHandlers/deleteAllUrlHandler')
 
 var _deleteAllUrlHandler2 = _interopRequireDefault(_deleteAllUrlHandler);
 
+var _getUrlHandler = require('./shorten/httpHandlers/getUrlHandler');
+
+var _getUrlHandler2 = _interopRequireDefault(_getUrlHandler);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // mongoose.connect(config.mongo.connString);
@@ -68,14 +72,14 @@ serverHttp.get('/resource-status', function (req, res) {
   return res.send('status ok!');
 });
 
-serverHttp.post('/shorten', (0, _createUrlHandler2.default)(_config2.default.urlApi));
+serverHttp.post('/shorten', (0, _createUrlHandler2.default)(_config2.default.urlApi, _config2.default.http.host));
 serverHttp.get('/shorten', (0, _getAllUrlHandler2.default)(_config2.default.urlApi));
 serverHttp.delete('/shorten', (0, _deleteAllUrlHandler2.default)());
-serverHttp.get('/shorten/:shortcode', function () {});
+serverHttp.get('/shorten/:shortcode', (0, _getUrlHandler2.default)(_config2.default.urlApi));
 serverHttp.all('*', function (req, res) {
   return res.send('not found', 404);
 });
 
-serverHttp.listen(_config2.default.http.port, function () {
-  return console.log('server listening on port ' + _config2.default.http.port + '!');
+serverHttp.listen(_config2.default.http.host.split(':')[2], function () {
+  return console.log('server listening on ' + _config2.default.http.host + '!');
 });
