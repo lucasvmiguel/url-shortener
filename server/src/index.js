@@ -1,26 +1,42 @@
-import http from 'http';
-import socketio from 'socket.io';
+import express from 'express';
+import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 
 import config from './config.json';
-import shortenHandler from './shorten/handler.js';
+import refreshData from './shorten/refreshData';
+import createUrlHandler from './shorten/httpHandlers/createUrlHandler';
+import getAllUrlHandler from './shorten/httpHandlers/getAllUrlHandler';
+import deleteAllUrlHandler from './shorten/httpHandlers/deleteAllUrlHandler';
 
-mongoose.connect(config.mongoConnString);
-mongoose.Promise = global.Promise;
+// mongoose.connect(config.mongo.connString);
+// mongoose.Promise = global.Promise;
 
-const serverHttp = http.createServer();
-const ws = socketio(serverHttp);
-const repoConn = mongoose.connection;
-const urlApi = config.urlApi;
+// db.on('error', (err) => {
+//   console.error(`couldnt open connection with mongo ${err}`);
+//   process.exit(1);
+// });
 
-ws.on('connection', (wsClient) => {
-  console.log('new wsClient');
+// db.once('open', () => console.log(`connected with mongo`));
 
-  wsClient.on('CREATE_URL', shortenHandler({wswsClient, urlApi, repoConn}));
 
-  wsClient.on('disconnect', (data) => console.log(data));
+setTimeout(() => {
+  setInterval(() => refreshData(config.urlApi), config.scheduleTime);
+}, 2000);
+
+const serverHttp = express();
+
+serverHttp.use(bodyParser.json());
+serverHttp.use(bodyParser.urlencoded({ extended: true }));
+serverHttp.use((err, req, res, next) => {
+  console.error('error: ', err.stack);
+  res.status(500).send('internal server error');
 });
 
-serverHttp.listen(config.port, () => {
-  console.log(`listening in ${config.port}`)
-});
+serverHttp.get('/resource-status', (req, res) => res.send('status ok!'));
+
+serverHttp.post('/shorten', createUrlHandler(config.urlApi));
+serverHttp.get('/shorten', getAllUrlHandler(config.urlApi));
+serverHttp.delete('/shorten', deleteAllUrlHandler());
+serverHttp.all('*', (req, res) => res.send('not found', 404));
+
+serverHttp.listen(config.http.port, () => console.log(`server listening on port ${config.http.port}!`));

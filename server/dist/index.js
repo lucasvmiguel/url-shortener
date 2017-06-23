@@ -1,64 +1,76 @@
 'use strict';
 
-var _http = require('http');
+var _express = require('express');
 
-var _http2 = _interopRequireDefault(_http);
+var _express2 = _interopRequireDefault(_express);
 
-var _socket = require('socket.io');
+var _bodyParser = require('body-parser');
 
-var _socket2 = _interopRequireDefault(_socket);
+var _bodyParser2 = _interopRequireDefault(_bodyParser);
+
+var _mongoose = require('mongoose');
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
 
 var _config = require('./config.json');
 
 var _config2 = _interopRequireDefault(_config);
 
-var _shortenApi = require('./shortenApi.js');
+var _refreshData = require('./shorten/refreshData');
 
-var shortenApi = _interopRequireWildcard(_shortenApi);
+var _refreshData2 = _interopRequireDefault(_refreshData);
 
-var _socketMessage = require('./socketMessage.js');
+var _createUrlHandler = require('./shorten/httpHandlers/createUrlHandler');
 
-var socketMsg = _interopRequireWildcard(_socketMessage);
+var _createUrlHandler2 = _interopRequireDefault(_createUrlHandler);
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+var _getAllUrlHandler = require('./shorten/httpHandlers/getAllUrlHandler');
+
+var _getAllUrlHandler2 = _interopRequireDefault(_getAllUrlHandler);
+
+var _deleteAllUrlHandler = require('./shorten/httpHandlers/deleteAllUrlHandler');
+
+var _deleteAllUrlHandler2 = _interopRequireDefault(_deleteAllUrlHandler);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var serverHttp = _http2.default.createServer();
-var ws = (0, _socket2.default)(serverHttp);
+// mongoose.connect(config.mongo.connString);
+// mongoose.Promise = global.Promise;
 
-shortenApi.createUrl({ urlApi: _config2.default.urlShorten, url: 'teste' }).then(function (x) {
-  return 'a';
-}).catch(function (y) {
-  return console.error('a', y);
-}).then(function (x) {
-  return console.log('d', x);
-}).catch(function (y) {
-  return console.error('b', y);
-});
-
-ws.on('connection', function (client) {
-  console.log('new client');
-
-  client.on('CREATE_URL', function (data) {});
-
-  // client.on('LIST_URLS', (data) => {
-
-  // });
-
-  // client.on('FIND_URLS', (data) => {
-
-  // });
-
-  // client.on('CLEAN_URLS', (data) => {
-
-  // });
-
-  client.on('disconnect', function (data) {
-    console.log(data);
-  });
-});
-
-// serverHttp.listen(config.port, () => {
-//   console.log(`listening in ${config.port}`)
+// db.on('error', (err) => {
+//   console.error(`couldnt open connection with mongo ${err}`);
+//   process.exit(1);
 // });
+
+// db.once('open', () => console.log(`connected with mongo`));
+
+
+setTimeout(function () {
+  setInterval(function () {
+    return (0, _refreshData2.default)(_config2.default.urlApi);
+  }, _config2.default.scheduleTime);
+}, 2000);
+
+var serverHttp = (0, _express2.default)();
+
+serverHttp.use(_bodyParser2.default.json());
+serverHttp.use(_bodyParser2.default.urlencoded({ extended: true }));
+serverHttp.use(function (err, req, res, next) {
+  console.error('error: ', err.stack);
+  res.status(500).send('internal server error');
+});
+
+serverHttp.get('/resource-status', function (req, res) {
+  return res.send('status ok!');
+});
+
+serverHttp.post('/shorten', (0, _createUrlHandler2.default)(_config2.default.urlApi));
+serverHttp.get('/shorten', (0, _getAllUrlHandler2.default)(_config2.default.urlApi));
+serverHttp.delete('/shorten', (0, _deleteAllUrlHandler2.default)());
+serverHttp.all('*', function (req, res) {
+  return res.send('not found', 404);
+});
+
+serverHttp.listen(_config2.default.http.port, function () {
+  return console.log('server listening on port ' + _config2.default.http.port + '!');
+});

@@ -1,28 +1,19 @@
 import request from 'request-promise';
 
-// export const fetch = ({urlApi, urlShorten}) => {
-//   const options = {
-//     uri: `${urlApi}/${urlShorten}`,
-//     resolveWithFullResponse: true
-//   }
+export const fetchStats = ({urlApi, shortcode}) => {
+  const options = {
+    uri: `${urlApi}/${shortcode}/stats`,
+    resolveWithFullResponse: true
+  }
 
-//   return request(options);
-// };
+  return request(options);
+};
 
-// export const fetchStats = ({urlApi, urlShorten}) => {
-//   const options = {
-//     uri: `${urlApi}/${urlShorten}/stats`,
-//     resolveWithFullResponse: true
-//   }
-
-//   return request(options);
-// };
-
-export const create = ({urlApi, url, shortCode}) => {
+export const create = (urlApi, {urlExtended, shortCode}) => {
   const options = {
     method: 'POST',
     uri: `${urlApi}/shorten`,
-    body: (shortCode) ? {url: url, shortcode: shortCode} : {url: url},
+    body: (shortCode) ? {url: urlExtended, shortcode: shortCode} : {url: urlExtended},
     json: true,
     resolveWithFullResponse: true
   };
