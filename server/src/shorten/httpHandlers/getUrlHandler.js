@@ -2,7 +2,7 @@ import {isValidParam} from '../schema';
 import {find, update} from '../repository';
 import {fetchUrl} from '../api';
 
-const getUrlHandler = (urlApi) => (req, res) => {
+const getUrlHandler = (urlApi, repoType) => (req, res) => {
   if (!isValidParam(req.params)) return res.status(400).send('invalid params');
 
   const url = find(req.params.shortcode);

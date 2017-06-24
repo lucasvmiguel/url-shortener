@@ -1,13 +1,12 @@
-import React from 'react';
 import {connect} from 'react-redux';
 
 import {ChangeUrlForm} from '../actions/shorten.action';
-import {saveUrl, deleteUrls} from '../services/api.service';
+import {saveUrlDispatch, deleteUrlsDispatch} from '../services/dispatch.service';
 import ShortenApp from '../components/ShortenApp';
 
 const createUrl = (dispatch, getState) => {
   const state = getState();
-  saveUrl({
+  saveUrlDispatch({
     apiUrl: state.config.apiUrl,
     url: state.shorten.urlForm,
     dispatch
@@ -16,7 +15,7 @@ const createUrl = (dispatch, getState) => {
 
 const deleteAllUrls = (dispatch, getState) => {
   const state = getState();
-  deleteUrls({
+  deleteUrlsDispatch({
     apiUrl: state.config.apiUrl,
     dispatch
   });

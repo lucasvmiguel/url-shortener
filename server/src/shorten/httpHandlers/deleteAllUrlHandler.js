@@ -1,4 +1,3 @@
-import {isValidSearch} from '../schema';
 import {removeAll} from '../repository';
 
 const deleteAllUrlHandler = () => (req, res) => {

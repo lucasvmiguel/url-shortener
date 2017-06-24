@@ -9,20 +9,25 @@ import createUrlHandler from './shorten/httpHandlers/createUrlHandler';
 import getAllUrlHandler from './shorten/httpHandlers/getAllUrlHandler';
 import deleteAllUrlHandler from './shorten/httpHandlers/deleteAllUrlHandler';
 import getUrlHandler from './shorten/httpHandlers/getUrlHandler';
+import {urlSchema} from './shorten/schema';
 
-// mongoose.connect(config.mongo.connString);
-// mongoose.Promise = global.Promise;
+mongoose.connect(config.repository.mongo.connString);
+mongoose.Promise = global.Promise;
 
-// db.on('error', (err) => {
-//   console.error(`couldnt open connection with mongo ${err}`);
-//   process.exit(1);
-// });
+let db = mongoose.connection;
 
-// db.once('open', () => console.log(`connected with mongo`));
+db.on('error', (err) => {
+  console.error('couldnt open connection with mongo:', err);
+  process.exit(1);
+});
 
-setTimeout(() => {
-  setInterval(() => refreshData(config.urlApi), config.scheduleTime);
-}, 10000);
+db.once('open', () => {
+  console.log(`connected with mongo`)
+});
+
+// setTimeout(() => {
+//   setInterval(() => refreshData(config.urlApi), config.scheduleTime);
+// }, 10000);
 
 const serverHttp = express();
 

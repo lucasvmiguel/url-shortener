@@ -1,11 +1,11 @@
-import {isValidStruct} from '../schema';
+import {isValidStructToCreate} from '../schema';
 import {save} from '../repository';
 import {create} from '../api';
 
 const createUrlHandler = (urlApi, host) => (req, res) => {
-  if (!isValidStruct(req.body)) return res.status(400).send('invalid params');
+  if (!isValidStructToCreate(req.body)) return res.status(400).send('invalid params');
 
-  create(urlApi, {urlExtended: req.body.urlExtended, shortcode: req.body.shortcode})
+  create(urlApi, req.body.urlExtended, req.body.shortcode)
     .then(handleCreateUrlApiResponse(res, host, req.body.urlExtended))
     .catch(handleCreateUrlApiError(res));
 };

@@ -6,20 +6,24 @@
   "scripts": {
     "build-config": "cp config.json dist/config.json",
     "build": "mkdir -p dist && babel src --out-dir dist && npm run build-config",
-    "start": "npm run build && node dist/index.js"
+    "start": "npm run build && node dist/index.js",
+    "test": "npm run build && mocha tests/**/**.spec.js"
   },
   "author": "Lucas Vieira",
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",
-    "babel-preset-env": "^1.5.2"
+    "babel-preset-env": "^1.5.2",
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
     "cors": "^2.8.3",
     "express": "^4.15.3",
     "mongoose": "^4.10.7",
+    "ramda": "^0.24.1",
     "request": "^2.81.0",
     "request-promise": "^4.2.1"
   }

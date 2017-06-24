@@ -40,23 +40,27 @@ var _getUrlHandler = require('./shorten/httpHandlers/getUrlHandler');
 
 var _getUrlHandler2 = _interopRequireDefault(_getUrlHandler);
 
+var _schema = require('./shorten/schema');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// mongoose.connect(config.mongo.connString);
-// mongoose.Promise = global.Promise;
+_mongoose2.default.connect(_config2.default.repository.mongo.connString);
+_mongoose2.default.Promise = global.Promise;
 
-// db.on('error', (err) => {
-//   console.error(`couldnt open connection with mongo ${err}`);
-//   process.exit(1);
-// });
+var db = _mongoose2.default.connection;
 
-// db.once('open', () => console.log(`connected with mongo`));
+db.on('error', function (err) {
+  console.error('couldnt open connection with mongo:', err);
+  process.exit(1);
+});
 
-setTimeout(function () {
-  setInterval(function () {
-    return (0, _refreshData2.default)(_config2.default.urlApi);
-  }, _config2.default.scheduleTime);
-}, 10000);
+db.once('open', function () {
+  console.log('connected with mongo');
+});
+
+// setTimeout(() => {
+//   setInterval(() => refreshData(config.urlApi), config.scheduleTime);
+// }, 10000);
 
 var serverHttp = (0, _express2.default)();
 

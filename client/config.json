@@ -1,4 +1,5 @@
 {
   "apiUrl": "http://localhost:5000",
-  "appUrl": "localhost:3000"
+  "appUrl": "localhost:3000",
+  "scheduleTime": 60000
 }

@@ -21,16 +21,14 @@ const ShortenApp = ({formUrl, urls, appUrl, onClickForm, onChangeForm, onClickCl
 
 ShortenApp.propTypes = {
   // props
-  formUrl: PropTypes.string.isRequired,
-  searchUrl: PropTypes.string.isRequired,
-  list: PropTypes.array.isRequired,
+  formUrl: PropTypes.string,
+  searchUrl: PropTypes.string,
+  list: PropTypes.array,
 
   // function props
-  onClickForm: PropTypes.func.isRequired,
-  onChangeForm: PropTypes.func.isRequired,
-  onClickClear: PropTypes.func.isRequired,
-  onClickSearch: PropTypes.func.isRequired,
-  onChangeSearch: PropTypes.func.isRequired
+  onClickForm: PropTypes.func,
+  onChangeForm: PropTypes.func,
+  onClickClear: PropTypes.func
 };
 
 export default ShortenApp;

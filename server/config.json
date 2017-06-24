@@ -3,9 +3,13 @@
     "port": 5000,
     "host": "http://localhost:5000"
   },
-  "mongo": {
-    "connString": "mongodb://localhost"
+  "repository": {
+    "type": "mongo",
+    
+    "mongo": {
+      "connString": "mongodb://localhost/url-shortener"
+    }
   },
   "urlApi": "http://gymia-shorty.herokuapp.com",
-  "scheduleTime": 100000000
+  "scheduleTime": 10000
 }

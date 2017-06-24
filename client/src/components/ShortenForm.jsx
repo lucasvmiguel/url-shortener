@@ -13,8 +13,6 @@ class ShortenForm extends React.Component {
   handleChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-    console.log();
     const newState = this.state;
     newState.url = value;
     this.setState(newState);
@@ -39,7 +37,7 @@ class ShortenForm extends React.Component {
 ShortenForm.propTypes = {
   onClick: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  url: PropTypes.string.isRequired
+  url: PropTypes.string
 }
 
 export default ShortenForm;

@@ -1,12 +1,20 @@
-import {isValidSearch} from '../schema';
-import {all} from '../repository';
+// import {isValidSearch} from '../schema';
+import * as repoLocal from '../localRepository';
+import * as repoMongo from '../mongoRepository';
 
-const getAllUrlHandler = (urlApi) => (req, res) => {
-  if (!isValidSearch(req.query)) return res.status(400).send('invalid params');
+const getAllUrlHandlerError = (res) => (error) => {
+  console.error('error to get all', err);
+  res.status(500).send('internal server error');
+};
 
-  const urls = all();
+const getAllUrlHandler = (urlApi, repoType) => (req, res) => {
+  // if (!isValidSearch(req.query)) return res.status(400).send('invalid params');
 
-  res.status(200).send(urls);
+  if (repoType === 'local') return res.status(200).send(repoLocal.all());
+
+  repoMongo.all()
+    .then((urls) => res.status(200).send(urls))
+    .catch(getAllUrlHandlerError(res));
 };
 
 export default getAllUrlHandler;

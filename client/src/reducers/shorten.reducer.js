@@ -18,8 +18,8 @@ const initialState = {
   isLoading: false
 };
 
-const shorten = (state = initialState, 
-action) => {
+const shorten = (state = initialState, action) => {
+  console.log('ACTION: ', action.type);
   switch (action.type) {
   case GET_ALL_URLS:
     state.error = null;
@@ -55,7 +55,7 @@ action) => {
   case DELETE_URLS_SUCCESS:
     state.isLoading = false;
     return state;
-  case CREATE_URL_ERROR:
+  case DELETE_URLS_ERROR:
     state.error = action.error;
     state.isLoading = false;
     return state;

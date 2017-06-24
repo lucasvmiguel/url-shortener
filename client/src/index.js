@@ -8,7 +8,7 @@ import shortenReducer from './reducers/shorten.reducer';
 import configReducer from './reducers/config.reducer';
 import {SetConfig} from './actions/config.action';
 import ShortenContainer from './containers/shorten.container';
-import {getAllUrls} from './services/api.service';
+import {getAllUrlsDispatch} from './services/dispatch.service';
 import registerServiceWorker from './registerServiceWorker';
 import './styles/index.css';
 
@@ -17,10 +17,12 @@ let store = createStore(combineReducers({shorten: shortenReducer, config: config
 // easy to debug
 window.store = store;
 
+// set config in state
 store.dispatch(SetConfig(config));
 
-// get all urls in first render
-getAllUrls({apiUrl: config.apiUrl, dispatch: store.dispatch})
+// get all urls in first render and after 1 minute
+getAllUrlsDispatch({apiUrl: config.apiUrl, dispatch: store.dispatch});
+setInterval(() => getAllUrlsDispatch({apiUrl: config.apiUrl, dispatch: store.dispatch}), config.scheduleTime);
 
 //TODO: remove math.random, using that because container is not rerender
 const render = () => ReactDOM.render(<ShortenContainer store={store} todo={Math.random()} />, document.getElementById('root'));
