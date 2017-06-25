@@ -12,11 +12,11 @@ export const isValidStructToCreate = (obj) => {
   if (typeof obj.urlExtended !== 'string' || typeof obj.urlShorten !== 'string' || !obj.urlExtended) return false;
 
   return true;
-}
+};
 
 export const isValidParam = (param) => {
   if (typeof param !== 'object') return false;
   if (typeof param.shortcode !== 'string' || !param.shortcode) return false;
 
   return true;
-}
+};

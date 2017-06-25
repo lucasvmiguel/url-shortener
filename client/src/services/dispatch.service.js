@@ -20,6 +20,8 @@ export const getAllUrlsDispatch = ({apiUrl, dispatch}) => {
       if (response.statusCode !== 200) return dispatch(GetAllUrlsError('status code was not 200'));
       
       dispatch(GetAllUrlsSuccess(JSON.parse(response.body)));
+
+      return null;
     })
     .catch((err) => dispatch(GetAllUrlsError(err)));
 };
@@ -32,9 +34,12 @@ export const saveUrlDispatch = ({apiUrl, url, dispatch}) => {
       if (response.statusCode !== 201) return dispatch(CreateUrlError('status code was not 201'));
       
       dispatch(CreateUrlSuccess());
+
+      getAllUrlsDispatch({apiUrl, dispatch});
+
+      return null;
     })
-    .then(() => getAllUrlsDispatch({apiUrl, dispatch}))
-    .catch((err) => dispatch(CreateUrlError(err)))
+    .catch((err) => dispatch(CreateUrlError(err)));
 };
 
 export const deleteUrlsDispatch = ({apiUrl, dispatch}) => {
@@ -45,7 +50,10 @@ export const deleteUrlsDispatch = ({apiUrl, dispatch}) => {
       if (response.statusCode !== 200) return dispatch(DeleteUrlsError('status code was not 200'));
       
       dispatch(DeleteUrlsSuccess());
+
+      getAllUrlsDispatch({apiUrl, dispatch});
+
+      return null;
     })
-    .then(() => getAllUrlsDispatch({apiUrl, dispatch}))
     .catch((err) => dispatch(DeleteUrlsError(err)));
 };

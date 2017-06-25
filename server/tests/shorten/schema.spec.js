@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const schema = require('../../dist/shorten/schema');
 const expect = require('chai').expect;
@@ -12,7 +12,7 @@ describe('Schema Tests', () => {
     expect(schema.isValidStructToCreate(test1)).to.be.false;
     expect(schema.isValidStructToCreate(test2)).to.be.false;
     expect(schema.isValidStructToCreate(test3)).to.be.true;
-  })
+  });
 
   it('should validate params to find url', () => {
     const test1 = {};
@@ -22,5 +22,5 @@ describe('Schema Tests', () => {
     expect(schema.isValidParam(test1)).to.be.false;
     expect(schema.isValidParam(test2)).to.be.false;
     expect(schema.isValidParam(test3)).to.be.true;
-  })
-})
+  });
+});

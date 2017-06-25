@@ -1,16 +1,14 @@
 import request from 'request-promise';
 
-export const getAllUrls = (apiUrl) => {
-  const options = {
+export const __getAllUrlsReq = (apiUrl) => {
+  return {
     uri: `${apiUrl}/shorten`,
     resolveWithFullResponse: true
   };
-
-  return request(options);
 };
 
-export const saveUrl = (apiUrl, url) => {
-  const options = {
+export const __saveUrlReq = (apiUrl, url) => {
+  return {
     uri: `${apiUrl}/shorten`,
     method: 'POST',
     body: {
@@ -20,16 +18,19 @@ export const saveUrl = (apiUrl, url) => {
     json: true,
     resolveWithFullResponse: true
   };
-
-  return request(options);
 };
 
-export const deleteUrls = (apiUrl) => {
-  const options = {
+export const __deleteUrlsReq = (apiUrl) => {
+  return {
     uri: `${apiUrl}/shorten`,
     method: 'DELETE',
     resolveWithFullResponse: true
   };
-
-  return request(options);
 };
+
+
+export const getAllUrls = (apiUrl) => request(__getAllUrlsReq(apiUrl));
+
+export const saveUrl = (apiUrl, url) => request(__saveUrlReq(apiUrl, url));
+
+export const deleteUrls = (apiUrl) => request(__deleteUrlsReq(apiUrl));

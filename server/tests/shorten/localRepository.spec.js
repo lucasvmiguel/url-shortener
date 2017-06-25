@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const repo = require('../../dist/shorten/localRepository');
 const expect = require('chai').expect;
@@ -14,7 +14,7 @@ describe('Local Repository Tests', () => {
     expect(repo.all()).to.have.lengthOf(2);
 
     repo.removeAll();
-  })
+  });
 
   it('should remove all urls', () => {
     repo.save({shortcode: 'aa'});
@@ -26,7 +26,7 @@ describe('Local Repository Tests', () => {
     repo.removeAll();
 
     expect(repo.all()).to.be.empty;
-  })
+  });
 
   it('should find url', () => {
     const url1 = {shortcode: 'aa'};
@@ -42,7 +42,7 @@ describe('Local Repository Tests', () => {
     expect(test2).to.be.a('undefined');
 
     repo.removeAll();
-  })
+  });
 
 
   it('should update url', () => {
@@ -63,5 +63,5 @@ describe('Local Repository Tests', () => {
     expect(urls[2]).to.deep.equal(url3);
 
     repo.removeAll();
-  })
-})
+  });
+});

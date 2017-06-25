@@ -11,23 +11,32 @@ import deleteAllUrlHandler from './shorten/httpHandlers/deleteAllUrlHandler';
 import getUrlHandler from './shorten/httpHandlers/getUrlHandler';
 import {urlSchema} from './shorten/schema';
 
-mongoose.connect(config.repository.mongo.connString);
-mongoose.Promise = global.Promise;
+import * as localRepo from './shorten/localRepository';
+import * as mongoRepo from './shorten/mongoRepository';
 
-let db = mongoose.connection;
+let repo = null;
 
-db.on('error', (err) => {
-  console.error('couldnt open connection with mongo:', err);
-  process.exit(1);
-});
+if (config.repository.type === 'local') {
+  repo = localRepo;
+} else {
+  repo = mongoRepo;
 
-db.once('open', () => {
-  console.log(`connected with mongo`)
-});
+  mongoose.connect(config.repository.mongo.connString);
 
-// setTimeout(() => {
-//   setInterval(() => refreshData(config.urlApi), config.scheduleTime);
-// }, 10000);
+  let db = mongoose.connection;
+
+  db.on('error', (err) => {
+    console.error('couldnt open connection with mongo:', err);
+    process.exit(1);
+  });
+
+  db.once('open', () => console.log(`connected with mongo`));
+}
+
+
+setTimeout(() => {
+  setInterval(() => refreshData(repo, config.urlApi), config.scheduleTime);
+}, 10000);
 
 const serverHttp = express();
 
@@ -39,12 +48,12 @@ serverHttp.use((err, req, res, next) => {
   res.status(500).send('internal server error');
 });
 
-serverHttp.get('/resource-status', (req, res) => res.send('status ok!'));
+serverHttp.get('/resource-status', (req, res) => res.status(200).send('status ok!'));
 
-serverHttp.post('/shorten', createUrlHandler(config.urlApi, config.http.host));
-serverHttp.get('/shorten', getAllUrlHandler(config.urlApi));
-serverHttp.delete('/shorten', deleteAllUrlHandler());
-serverHttp.get('/shorten/:shortcode', getUrlHandler(config.urlApi));
-serverHttp.all('*', (req, res) => res.send('not found', 404));
+serverHttp.post('/shorten', createUrlHandler({urlApi: config.urlApi, host: config.http.host, repo: repo}));
+serverHttp.get('/shorten', getAllUrlHandler(config.urlApi, repo));
+serverHttp.delete('/shorten', deleteAllUrlHandler(repo));
+serverHttp.get('/shorten/:shortcode', getUrlHandler(config.urlApi, repo));
+serverHttp.all('*', (req, res) => res.status(404).send('not found'));
 
 serverHttp.listen(config.http.host.split(':')[2], () => console.log(`server listening on ${config.http.host}!`));

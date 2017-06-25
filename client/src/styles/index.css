@@ -9,10 +9,6 @@
   display: flex;
 }
 
-.flex-break {
-  flex-flow: row wrap;
-}
-
 .col {
   flex: auto;
 }
@@ -58,7 +54,6 @@
 }
 
 .flex-grid .col,
-.flex-grid .col-sm, 
 .flex-grid .col-1,
 .flex-grid .col-0-9,
 .flex-grid .col-0-8,
@@ -73,12 +68,25 @@
 }
 
 @media (min-width: 60rem) {
+  .panel-left {
+    flex: 0.3;
+  }
+
+  .panel-center {
+    flex: 0.6;
+  }
+
+  .panel-right {
+    flex: 0.3;
+  }
+
+  .shorten-form {
+    flex-flow: row wrap;
+  }
+
   .header-description {
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.4rem;
     align-self: flex-end;
-    justify-content: flex-end;
-    font-size: 14px;
-    color: #9a9a9a;
     text-align: right;
   }
 
@@ -87,17 +95,33 @@
     color: #F4272F;
     padding-left: 1rem;
     display: none;
+    cursor: pointer;
+    font-size: .95rem;
   }
 }
 
 @media (max-width: 60rem) {
-  .flex-grid .col-sm {
-    flex: auto;
+  .url-label-new {
+    display: none;
+  }
+
+  .panel-left {
+    flex: .5;
+  }
+
+  .panel-center {
+    flex: 1;
+  }
+
+  .panel-right {
+    flex: .5;
+  }
+
+  .shorten-form {
+    flex-flow: column wrap;
   }
 
   .header-description {
-    font-size: 14px;
-    color: #9a9a9a;
     text-align: left;
   }
 
@@ -106,16 +130,41 @@
     color: #F4272F;
     padding-left: 0;
     display: none;
+    cursor: pointer;
   }
 }
 
 @media (max-width: 30rem) {
+  .panel-left {
+    flex: .1;
+  }
+
+  .panel-center {
+    flex: 1;
+  }
+
+  .panel-right {
+    flex: .1;
+  }
+
   .click-to-copy-link {
     text-decoration: none;
     color: #F4272F;
     padding-left: 0;
     display: none;
+    cursor: pointer;
   }
+}
+
+.shorten-header {
+  flex-flow: row wrap;
+}
+
+.header-description {
+  padding-bottom: 0.4rem;
+  align-self: flex-end;
+  font-size: 0.75rem;
+  color: #9a9a9a;
 }
 
 .header-title {
@@ -124,16 +173,14 @@
   font-size: 2.5rem;
 }
 
-
-
 .form-input-text {
   background-color: #E9E9E9;
   border-radius: 0.2rem;
   border: 0px;
   height: 2rem;
   padding-left: 1rem;
-  color: #5C5B5B;
-  font-size: 0.9rem;
+  color: #5C5B5B !important;
+  font-size: 0.75rem;
 }
 
 .form-input-submit {
@@ -142,19 +189,28 @@
   color: white;
   border: 0px;
   height: 2rem;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.clear-section {
+  flex-flow: row wrap;
 }
 
 .clear-section-title {
   color: #5C5B5B;
   text-decoration: none;
   font-size: 1.2rem;
+  display: table;
+  font-weight: 100;
 }
 
 .clear-section-link {
   text-decoration: none;
   color: #F4272F;
-  padding-top: 0.1rem;
+  padding-top: 0.2rem;
+  cursor: pointer;
+  font-size: 0.9rem;
 }
 
 .padding-top-section {
@@ -162,17 +218,25 @@
 }
 
 .shorten-list-header {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   color: #9a9a9a;
 }
 
 .shorten-list-item-info {
   text-align: center;
   color: #5C5B5B;
+  font-size: .85rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .align-center {
   text-align: center;
+}
+
+.url-content-links {
+  padding-bottom: .2rem;
 }
 
 .url-content-links:hover .click-to-copy-link {
@@ -182,6 +246,7 @@
 .url-shorten-link {
   text-decoration: none;
   color: #F4272F;
+  font-size: .85rem;
 }
 
 .url-shorten-link:hover + .click-to-copy-link {
@@ -190,11 +255,58 @@
     
 .url-extended-link {
   color: #c5c5c5;
+  font-size: 0.85rem;
 }
 
 .url-domain-link {
   color: #5C5B5B;
   text-decoration: none;
+  font-size: .85rem;
 }
 
-/*#5C5B5B*/
+.error-panel {
+  border-radius: 0.2rem;
+  background-color: #ffb9b9;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  color: #5C5B5B;
+}
+
+.error-panel-message {
+  width: 100%;
+  font-size: .85rem;
+  padding-top: .25rem;
+}
+
+.error-panel-close {
+  justify-content: flex-end;
+  font-size: .9rem;
+  padding-top: .1rem;
+}
+
+.loading-panel {
+  background-color: #E9E9E9;
+  text-align: center;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  color: #5C5B5B;
+  border-radius: 0.2rem;
+}
+
+.loading-panel-message {
+  width: 100%;
+  font-size: .85rem;
+  padding-top: .25rem;
+}
+
+.url-label-new {
+  margin-left: 1rem;
+  padding-top: .1rem;
+  padding-bottom: .1rem;
+  padding-left: .2rem;
+  font-size: 0.7rem;
+  background-color: #F4272F;
+  padding-right: .2rem;
+  color: white;
+  border-radius: .2rem;
+}

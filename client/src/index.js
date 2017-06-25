@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore, applyMiddleware, combineReducers} from 'redux';
 import thunk from 'redux-thunk';
+import R from 'ramda';
 
 import config from './config.json';
 import shortenReducer from './reducers/shorten.reducer';
@@ -22,15 +23,16 @@ store.dispatch(SetConfig(config));
 
 // get all urls in first render and after 1 minute
 getAllUrlsDispatch({apiUrl: config.apiUrl, dispatch: store.dispatch});
-setInterval(() => getAllUrlsDispatch({apiUrl: config.apiUrl, dispatch: store.dispatch}), config.scheduleTime);
+// setInterval(() => getAllUrlsDispatch({apiUrl: config.apiUrl, dispatch: store.dispatch}), config.scheduleTime);
 
-//TODO: remove math.random, using that because container is not rerender
-const render = () => ReactDOM.render(<ShortenContainer store={store} todo={Math.random()} />, document.getElementById('root'));
+const render = (state) => {
+  console.log('STATE CHANGED:' , state);
+  ReactDOM.render(<ShortenContainer store={store} state={state}/>, document.getElementById('root'))
+};
 
 registerServiceWorker();
 
-render();
+render(R.clone(store.getState()));
 store.subscribe(() => {
-  console.log('CHANGED STATE:', store.getState());
-  render(); 
+  render(R.clone(store.getState()));
 });

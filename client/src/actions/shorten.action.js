@@ -8,7 +8,8 @@ import {
   CHANGE_URL_FORM,
   DELETE_URLS,
   DELETE_URLS_SUCCESS,
-  DELETE_URLS_ERROR 
+  DELETE_URLS_ERROR,
+  DELETE_ERROR
 } from '../types/shorten.type';
 
 export const GetAllUrls = () => {
@@ -50,4 +51,8 @@ export const DeleteUrlsSuccess = () => {
 
 export const DeleteUrlsError = (error) => {
   return {type: DELETE_URLS_ERROR, error: error};
+};
+
+export const DeleteError = (error) => {
+  return {type: DELETE_ERROR};
 };

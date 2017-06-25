@@ -1,39 +1,53 @@
 import {connect} from 'react-redux';
 
-import {ChangeUrlForm} from '../actions/shorten.action';
+import {ChangeUrlForm, DeleteError} from '../actions/shorten.action';
 import {saveUrlDispatch, deleteUrlsDispatch} from '../services/dispatch.service';
 import ShortenApp from '../components/ShortenApp';
 
-const createUrl = (dispatch, getState) => {
+const deleteAllUrls = (dispatch, getState) => {
   const state = getState();
+
+  deleteUrlsDispatch({
+    apiUrl: state.config.apiUrl,
+    dispatch
+  });
+
+  return null;
+};
+
+const onClickForm = (e) => (dispatch, getState) => {
+  e.preventDefault();
+
+  const state = getState();
+
   saveUrlDispatch({
     apiUrl: state.config.apiUrl,
     url: state.shorten.urlForm,
     dispatch
   });
-};
 
-const deleteAllUrls = (dispatch, getState) => {
-  const state = getState();
-  deleteUrlsDispatch({
-    apiUrl: state.config.apiUrl,
-    dispatch
-  });
-};
+  return null;
+}
+
+const onChangeForm = (e) => (dispatch) => dispatch(ChangeUrlForm(e.target.value));
 
 const mapStateToProps = (state, ownProps) => {
   return {
     urls: state.shorten.urls,
-    formUrl: state.shorten.formUrl,
-    appUrl: state.config.appUrl
+    urlForm: state.shorten.urlForm,
+    error: state.shorten.error,
+    appUrl: state.config.appUrl,
+    timeStart: state.config.timeStart,
+    isLoading: state.shorten.isLoading
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onClickClear: () => dispatch(deleteAllUrls),
-    onClickForm: () => dispatch(createUrl),
-    onChangeForm: (url) => dispatch(ChangeUrlForm(url))
+    onClickForm: (e) => dispatch(onClickForm(e)),
+    onChangeForm: (e) => dispatch(onChangeForm(e)),
+    onDeleteError: () => dispatch(DeleteError()),
   };
 };
 

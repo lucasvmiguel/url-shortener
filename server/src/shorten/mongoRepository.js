@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+
 import {urlSchema} from './schema.js';
 
 const urlS = mongoose.model('urls', urlSchema);
@@ -9,15 +10,15 @@ export const save = (urlObj) => {
 };
 
 export const update = ({shortcode, urlObj}) => {
-  return new urlS(urlObj).update({shortcode: shortcode}, urlObj); 
+  return urlS.update({shortcode: shortcode}, urlObj); 
 };
 
 export const all = () => {
-  return urlS.find({});
+  return urlS.find({}).exec();
 };
 
 export const find = (shortcode) => {
-  return urlS.find({shortcode: shortcode});
+  return urlS.findOne({shortcode: shortcode}).exec();
 };
 
 export const removeAll = (shortcode) => {

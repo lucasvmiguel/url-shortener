@@ -4,7 +4,7 @@
     "host": "http://localhost:5000"
   },
   "repository": {
-    "type": "mongo",
+    "type": "local",
     
     "mongo": {
       "connString": "mongodb://localhost/url-shortener"

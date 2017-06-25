@@ -1,6 +1,6 @@
-export const timeSinceString = (date) => {
+export const timeSinceString = (timeNow, date) => {
 
-  var seconds = Math.floor((new Date() - date) / 1000);
+  var seconds = Math.floor((timeNow - date) / 1000);
 
   var interval = Math.floor(seconds / 31536000);
 
