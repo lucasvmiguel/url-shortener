@@ -9,7 +9,7 @@ export const urlSchema = {
 
 export const isValidStructToCreate = (obj) => {
   if (typeof obj !== 'object') return false;
-  if (typeof obj.urlExtended !== 'string' || typeof obj.urlShorten !== 'string' || !obj.urlExtended) return false;
+  if (typeof obj.urlExtended !== 'string' || typeof obj.shortcode !== 'string' || !obj.urlExtended) return false;
 
   return true;
 };

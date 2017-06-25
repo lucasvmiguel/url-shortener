@@ -1,5 +1,9 @@
 server/node_modules/
 server/data/
 server/dist/
+server/dist/config.json
+server/npm-debug.log
+
 client/node_modules/
-npm-debug.log
+client/src/config.json
+client/npm-debug.log

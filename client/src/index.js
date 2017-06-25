@@ -23,7 +23,7 @@ store.dispatch(SetConfig(config));
 
 // get all urls in first render and after 1 minute
 getAllUrlsDispatch({apiUrl: config.apiUrl, dispatch: store.dispatch});
-// setInterval(() => getAllUrlsDispatch({apiUrl: config.apiUrl, dispatch: store.dispatch}), config.scheduleTime);
+setInterval(() => getAllUrlsDispatch({apiUrl: config.apiUrl, dispatch: store.dispatch}), config.scheduleTime);
 
 const render = (state) => {
   console.log('STATE CHANGED:' , state);
