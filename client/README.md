@@ -17,9 +17,9 @@ npm start
 Change this config in [CONFIG](config.json)
 ```json
   {
-    "apiUrl": "http://localhost:5000", // url of url-shortener server
-    "appUrl": "localhost:3000",        // url of url-shortener client (this not change the port running)
-    "scheduleTime": 60000              // polling time to server GET - getting all urls (milliseconds)
+    "apiUrl": "http://localhost:5000",  "url of url-shortener server"
+    "appUrl": "localhost:3000",         "url of url-shortener client (this not change the port running)"
+    "scheduleTime": 60000               "polling time to server GET - getting all urls (milliseconds)"
   }
 ```
 
