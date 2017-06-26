@@ -1,6 +1,7 @@
 # url-shortener
 
-This project creates short URLS to share, by default this application will not run with mongo, but you can change this in [server config](server)
+This project creates short URLS to share.
+By default, this application will not run with mongo, but you can change this in [server config](server)
 
 ## Requirements
 * Nodejs
