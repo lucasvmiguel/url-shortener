@@ -14,7 +14,7 @@ it('should return save url req', function () {
   expect(test).to.deep.equal({ 
     uri: 'http://foo/shorten',
     method: 'POST',
-    body: { urlExtended: 'http://bar', urlShorten: '' },
+    body: { urlExtended: 'http://bar', shortcode: '' },
     json: true,
     resolveWithFullResponse: true });
 });

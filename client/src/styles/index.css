@@ -93,10 +93,10 @@
   .click-to-copy-link {
     text-decoration: none;
     color: #F4272F;
-    padding-left: 1rem;
     display: none;
     cursor: pointer;
-    font-size: .95rem;
+    font-size: .9rem;
+    padding-left: 1rem;
   }
 }
 
@@ -128,9 +128,9 @@
   .click-to-copy-link {
     text-decoration: none;
     color: #F4272F;
-    padding-left: 0;
     display: none;
     cursor: pointer;
+    font-size: .9rem;
   }
 }
 
@@ -150,9 +150,9 @@
   .click-to-copy-link {
     text-decoration: none;
     color: #F4272F;
-    padding-left: 0;
     display: none;
     cursor: pointer;
+    font-size: .9rem;
   }
 }
 
@@ -208,7 +208,7 @@
 .clear-section-link {
   text-decoration: none;
   color: #F4272F;
-  padding-top: 0.2rem;
+  padding-top: 0.3rem;
   cursor: pointer;
   font-size: 0.9rem;
 }
@@ -274,14 +274,16 @@
 
 .error-panel-message {
   width: 100%;
-  font-size: .85rem;
-  padding-top: .25rem;
+  font-size: .75rem;
+  padding-top: .2rem;
+  text-align: center;
 }
 
 .error-panel-close {
   justify-content: flex-end;
-  font-size: .9rem;
+  font-size: .8rem;
   padding-top: .1rem;
+  cursor: pointer;
 }
 
 .loading-panel {
@@ -295,8 +297,8 @@
 
 .loading-panel-message {
   width: 100%;
-  font-size: .85rem;
-  padding-top: .25rem;
+  font-size: .75rem;
+  padding-top: .2rem;
 }
 
 .url-label-new {
@@ -309,4 +311,11 @@
   padding-right: .2rem;
   color: white;
   border-radius: .2rem;
+}
+
+.no-urls-shortened {
+  text-align: center;
+  padding-top: 3rem;
+  font-size: 0.9rem;
+  color: #5C5B5B;
 }

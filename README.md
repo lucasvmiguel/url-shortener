@@ -1,10 +1,10 @@
 # url-shortener
 
-This project creates short URLS to you share
+This project creates short URLS to share, by default this application will not run with mongo, but you can change this in [server config](server)
 
 ## Requirements
 * Nodejs
-* Docker running with sudo (you can run in local cache mode if you prefer. see the server [README](Server))
+* Docker running with sudo (you can run in local cache mode if you prefer. see the server [README](server))
 * Makefile (you can run without it, but you will need to start the server and the client)
 
 ## Installation
@@ -22,8 +22,8 @@ make run_client
 ## Applications
 
 This project contains two applications:
-* [Client side](Client)
-* [Server side](Client)
+* [Client side](client)
+* [Server side](server)
 
 ## License
 

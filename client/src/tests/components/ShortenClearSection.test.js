@@ -5,7 +5,7 @@ import {shallowRender} from '../utils';
 const expect = require('chai').expect;
 
 it('ShortenClearSection should render correctly', function () {
-  const props = {title: 'some title', onClick: () => {}};
+  const props = {title: 'some title', onClick: () => {}, urls: [{}]};
   const shortenClearSection = shallowRender(ShortenClearSection, props);
 
   expect(shortenClearSection.props.children[0].type).to.equal('h3');

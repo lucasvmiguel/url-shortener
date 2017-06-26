@@ -1,6 +1,6 @@
 # url-shortener - client
 
-This application is the client of url-shortener
+This application is the client of url-shortener api
 
 ## Installation
 ```bash

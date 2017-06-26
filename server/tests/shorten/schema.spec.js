@@ -6,12 +6,18 @@ const expect = require('chai').expect;
 describe('Schema Tests', () => { 
   it('should validate struct to create', () => {
     const test1 = {};
-    const test2 = {urlExtended: 'http://localhost:3000', urlShorten: 99};
-    const test3 = {urlExtended: 'http://localhost:3000', urlShorten: ''};
+    const test2 = {urlExtended: 'http://globo.com', shortcode: 99};
+    const test3 = {urlExtended: 'asdasdas', shortcode: ''};
+    const test4 = {urlExtended: 'test.com', shortcode: ''};
+    const test5 = {urlExtended: 'http://globo.com', shortcode: ''};
+    const test6 = {urlExtended: 'http://www.globo.com', shortcode: ''};
 
     expect(schema.isValidStructToCreate(test1)).to.be.false;
     expect(schema.isValidStructToCreate(test2)).to.be.false;
-    expect(schema.isValidStructToCreate(test3)).to.be.true;
+    expect(schema.isValidStructToCreate(test3)).to.be.false;
+    expect(schema.isValidStructToCreate(test4)).to.be.false;
+    expect(schema.isValidStructToCreate(test5)).to.be.true;
+    expect(schema.isValidStructToCreate(test6)).to.be.true;
   });
 
   it('should validate params to find url', () => {

@@ -13,7 +13,7 @@ export const __saveUrlReq = (apiUrl, url) => {
     method: 'POST',
     body: {
       "urlExtended": url,
-      "urlShorten": ""
+      "shortcode": ""
     },
     json: true,
     resolveWithFullResponse: true

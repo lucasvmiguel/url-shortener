@@ -50,7 +50,7 @@ class ShortenItem extends React.Component {
 ShortenItem.propTypes = {
   url: PropTypes.object.isRequired,
   appUrl: PropTypes.string.isRequired,
-  timeStart: PropTypes.instanceOf(Date).isRequired
+  timeStart: PropTypes.number.isRequired
 }
 
 export default ShortenItem;

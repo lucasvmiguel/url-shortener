@@ -16,7 +16,7 @@ const ShortenApp = ({urlForm, error, urls, appUrl, isLoading, timeStart, onClick
       <ShortenForm url={urlForm} onClick={onClickForm} onChange={onChangeForm} />
       {error && <ShortenError error={error} closeClick={onDeleteError}/>}
       {isLoading && <ShortenLoading />}
-      <ShortenClearSection title='Previously shortened by you' onClick={onClickClear} />
+      <ShortenClearSection title='Previously shortened by you' onClick={onClickClear} urls={urls} />
       <ShortenList appUrl={appUrl} urls={urls} timeStart={timeStart}/>
     </div>
     <div className='panel-right'></div>
@@ -30,7 +30,7 @@ ShortenApp.propTypes = {
   error: PropTypes.number,
   list: PropTypes.array,
   isLoading: PropTypes.bool,
-  timeStart: PropTypes.instanceOf(Date),
+  timeStart: PropTypes.number,
 
   // function props
   onClickForm: PropTypes.func,
