@@ -19,17 +19,17 @@ Change this config in [CONFIG](config.json)
 ```json
   {
     "http": {               
-      "host": "http://localhost:5000" // http server host 
+      "host": "http://localhost:5000"                      "http server host"
     },
     "repository": {
-      "type": "local", // you can run local(to cache in memory) or mongo(to persist)
+      "type": "local",                                     "you can run local(to cache in memory) or mongo(to persist)"
       
       "mongo": {
-        "connString": "mongodb://localhost/url-shortener" // connection string of mongo (if you configurated to run with mongo)
+        "connString": "mongodb://localhost/url-shortener"  "connection string of mongo (if you configurated to run with mongo)"
       }
     },
-    "urlApi": "http://gymia-shorty.herokuapp.com", // url api of shortener
-    "scheduleTime": 10000 // polling time to server GET url stats (milliseconds)
+    "urlApi": "http://gymia-shorty.herokuapp.com",         "url api of shortener"
+    "scheduleTime": 10000                                  "polling time to server GET url stats (milliseconds)"
   }
 ```
 
